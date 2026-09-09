@@ -4,23 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Game Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Notificación Integrada -->
   <div id="toast" class="toast-notification">
-    <span class="toast-icon">⚠️</span>
+    <span>⚠️</span>
     <span id="toastMsg">El juego ya existe en el sistema.</span>
   </div>
 
   <div class="container">
-    <h1>🎮 Video Game Tracker</h1>
+    <header>
+      <div class="brand-logo">
+        <span class="controller-icon">🎮</span>
+        <h1>Video Game Tracker</h1>
+      </div>
+    </header>
 
-    <!-- Barra de Controles Superior -->
     <div class="top-controls">
       <div class="create-section-form">
-        <input type="text" id="sectionInput" placeholder="Crear nueva categoría..." />
+        <input type="text" id="sectionInput" placeholder="Nueva categoría (ej: Por Jugar)..." />
         <button class="btn-primary" onclick="addSection()">+ Categoría</button>
       </div>
       <div class="search-box">
@@ -28,7 +34,6 @@
       </div>
     </div>
 
-    <!-- Filtros Rápidos por Plataforma -->
     <div class="platform-filters">
       <button class="filter-btn active" onclick="setPlatformFilter('ALL', this)">Todas</button>
       <button class="filter-btn" onclick="setPlatformFilter('PC', this)">💻 PC</button>
@@ -37,14 +42,12 @@
       <button class="filter-btn" onclick="setPlatformFilter('Switch', this)">🔴 Switch</button>
     </div>
 
-    <!-- Gestión de Copia de Seguridad -->
     <div class="backup-actions">
-      <button class="btn-secondary" onclick="exportData()">💾 Exportar Copia</button>
-      <button class="btn-secondary" onclick="document.getElementById('importInput').click()">📂 Importar Copia</button>
+      <button class="btn-secondary" onclick="exportData()">💾 Exportar Backup</button>
+      <button class="btn-secondary" onclick="document.getElementById('importInput').click()">📂 Importar Backup</button>
       <input type="file" id="importInput" accept=".json" onchange="importData(event)" />
     </div>
 
-    <!-- Grid Contenedor -->
     <div id="boardsGrid" class="boards-grid"></div>
   </div>
 
