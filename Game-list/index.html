@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Game Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Notificación Integrada -->
+  <div id="toast" class="toast-notification">
+    <span class="toast-icon">⚠️</span>
+    <span id="toastMsg">El juego ya existe en el sistema.</span>
+  </div>
+
+  <div class="container">
+    <h1>🎮 Video Game Tracker</h1>
+
+    <!-- Barra de Controles Superior -->
+    <div class="top-controls">
+      <div class="create-section-form">
+        <input type="text" id="sectionInput" placeholder="Crear nueva categoría..." />
+        <button class="btn-primary" onclick="addSection()">+ Categoría</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar juego..." oninput="render()" />
+      </div>
+    </div>
+
+    <!-- Filtros Rápidos por Plataforma -->
+    <div class="platform-filters">
+      <button class="filter-btn active" onclick="setPlatformFilter('ALL', this)">Todas</button>
+      <button class="filter-btn" onclick="setPlatformFilter('PC', this)">💻 PC</button>
+      <button class="filter-btn" onclick="setPlatformFilter('PlayStation', this)">🎮 PlayStation</button>
+      <button class="filter-btn" onclick="setPlatformFilter('Xbox', this)">🟩 Xbox</button>
+      <button class="filter-btn" onclick="setPlatformFilter('Switch', this)">🔴 Switch</button>
+    </div>
+
+    <!-- Gestión de Copia de Seguridad -->
+    <div class="backup-actions">
+      <button class="btn-secondary" onclick="exportData()">💾 Exportar Copia</button>
+      <button class="btn-secondary" onclick="document.getElementById('importInput').click()">📂 Importar Copia</button>
+      <input type="file" id="importInput" accept=".json" onchange="importData(event)" />
+    </div>
+
+    <!-- Grid Contenedor -->
+    <div id="boardsGrid" class="boards-grid"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+:root {
+  --bg-primary: #0b0f19;
+  --bg-card: #151c2c;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --border: #26334d;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --title-color: #38bdf8;
+  --success: #10b981;
+
+  /* Colores de Plataformas */
+  --pc-color: #38bdf8;
+  --ps-color: #3b82f6;
+  --xbox-color: #22c55e;
+  --switch-color: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  margin: 0;
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  letter-spacing: -0.5px;
+}
+
+/* Notificación de Alerta (Toast) */
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #1e1b4b;
+  color: #fef3c7;
+  border: 1px solid var(--warning);
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+  max-width: 380px;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-icon {
+  font-size: 1.3rem;
+}
+
+/* Barra de controles superior */
+.top-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.create-section-form, .search-box {
+  display: flex;
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 8px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.create-section-form {
+  flex: 1 1 400px;
+  max-width: 600px;
+}
+
+.search-box {
+  flex: 1 1 250px;
+  max-width: 350px;
+}
+
+input[type="text"], select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+input[type="text"] {
+  flex: 1;
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: var(--accent);
+}
+
+/* Input especial para edición de título directo en la tarjeta */
+.edit-title-input {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--title-color);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--accent) !important;
+  border-radius: 8px;
+  padding: 4px 8px !important;
+  width: 100%;
+  outline: none;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Filtro de Plataformas */
+.platform-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent);
+}
+
+.filter-btn.active {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Badges de Plataformas */
+.platform-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 6px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.platform-badge.PC { background-color: rgba(56, 189, 248, 0.15); color: var(--pc-color); border: 1px solid var(--pc-color); }
+.platform-badge.PlayStation { background-color: rgba(59, 130, 246, 0.15); color: var(--ps-color); border: 1px solid var(--ps-color); }
+.platform-badge.Xbox { background-color: rgba(34, 197, 94, 0.15); color: var(--xbox-color); border: 1px solid var(--xbox-color); }
+.platform-badge.Switch { background-color: rgba(239, 68, 68, 0.15); color: var(--switch-color); border: 1px solid var(--switch-color); }
+
+/* Botones */
+button.btn-primary {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+button.btn-primary:hover {
+  box-shadow: 0 0 14px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  color: var(--text-main);
+  border-color: var(--accent);
+}
+
+.backup-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.progress-bar-container {
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  height: 8px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  background-color: var(--success);
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Masonry Grid */
+.boards-grid {
+  column-count: 2;
+  column-gap: 1.75rem;
+}
+
+@media (max-width: 750px) {
+  .boards-grid {
+    column-count: 1;
+  }
+}
+
+.section-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  break-inside: avoid;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.section-card.dragging { opacity: 0.4; }
+.section-card.drag-over { border-color: var(--accent); transform: scale(1.01); }
+
+.section-card.global-completed {
+  border-color: var(--success);
+  background-color: rgba(16, 185, 129, 0.03);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  cursor: grab;
+}
+
+.section-header:active { cursor: grabbing; }
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 2px 6px;
+  transition: background-color 0.2s ease;
+}
+
+.section-title:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.global-completed .section-title { color: var(--success); cursor: default; }
+.global-completed .section-title:hover { background-color: transparent; }
+
+.badge-count {
+  font-size: 0.75rem;
+  background-color: var(--bg-primary);
+  color: var(--text-muted);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.add-game-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+}
+
+.add-game-form button {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  background-color: #334155;
+  color: var(--text-main);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.add-game-form button:hover { background-color: var(--accent); }
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 40px;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.game-list.drag-over-list {
+  background-color: rgba(99, 102, 241, 0.1);
+  border: 1px dashed var(--accent);
+}
+
+.game-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-primary);
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+  cursor: grab;
+}
+
+.game-item:active { cursor: grabbing; }
+.game-item.dragging-game { opacity: 0.3; }
+
+.game-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.checkbox-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkbox-container input { opacity: 0; width: 0; height: 0; }
+
+.custom-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border: 2px solid var(--text-muted);
+  border-radius: 7px;
+  transition: all 0.2s ease;
+}
+
+.checkbox-container:hover input ~ .custom-checkmark { border-color: var(--accent); }
+
+.checkbox-container input:checked ~ .custom-checkmark {
+  background-color: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.custom-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .custom-checkmark:after { display: block; }
+
+.game-title-wrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.game-title {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.completed .game-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.origin-badge {
+  font-size: 0.8rem;
+  background-color: #1e293b;
+  color: var(--text-muted);
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.delete-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 1.15rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.empty-msg {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  text-align: center;
+  padding: 12px 0;
+}
+
+#importInput { display: none; }
